@@ -89,7 +89,7 @@ def create_from_structure(base_path, structure):
         prev_indent = indent  # Update indentation level
 
 # Example structure definition
-structure = """MarkdownMaster/
+structure = """python-directory-file-creator/
 ├── app.py
 ├── config.py
 ├── requirements.txt
@@ -125,7 +125,7 @@ structure = """MarkdownMaster/
 └── README.md"""
 
 # Define the base path where the structure will be created
-base_path = "MarkdownMaster"
+base_path = "python-directory-file-creator"
 
 # Create the structure from the given input
 create_from_structure(base_path, structure)
@@ -211,7 +211,7 @@ file_structure = [
 ]
 
 # Define the base path where you want to create the file structure
-base_path = 'MarkdownMaster'
+base_path = 'python-directory-file-creator'
 
 # Create the file structure
 create_file_structure(base_path, file_structure)
@@ -297,7 +297,7 @@ file_structure_with_content = {
 }
 
 # Define the base path where you want to create the file structure
-base_path = 'MarkdownMaster'
+base_path = 'python-directory-file-creator'
 
 # Create the file structure with content
 create_file_structure_with_content(base_path, file_structure_with_content)
@@ -315,7 +315,7 @@ print(f"File structure with content created at {os.path.abspath(base_path)}")
 The following structure will be created by the scripts above:
 
 ```
-MarkdownMaster/
+python-directory-file-creator/
 ├── app.py
 ├── config.py
 ├── requirements.txt
@@ -368,7 +368,7 @@ MarkdownMaster/
    - Upon successful execution, the directory structure will be created in the specified `base_path`.
 
 3. **Verify:**
-   - Navigate to the created `MarkdownMaster` directory to verify the structure and files.
+   - Navigate to the created `python-directory-file-creator` directory to verify the structure and files.
 
 ## Conclusion
 
@@ -378,7 +378,7 @@ Feel free to customize and extend the provided scripts to fit your specific use 
 
 ---
 
-# MarkdownMaster Lecture Notes
+# python-directory-file-creator Lecture Notes
 
 This lecture covers how to programmatically create a directory and file structure using Python. By following the steps and examples provided, you can automate the setup of your projects, ensuring consistency and saving valuable time.
 
@@ -389,13 +389,8 @@ This lecture covers how to programmatically create a directory and file structur
 - **Data Structures:** Represent file structures using strings or nested dictionaries for flexible and scalable implementations.
 - **Recursion:** Employ recursive functions to handle nested directories efficiently.
 
-## Further Reading
 
-- [Python `os` Module Documentation](https://docs.python.org/3/library/os.html)
-- [File and Directory Operations in Python](https://realpython.com/working-with-files-in-python/)
-- [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) by Al Sweigart
-
-Feel free to contribute to this lecture by submitting issues or pull requests on the [GitHub repository](https://github.com/your-repo/MarkdownMaster).
+Feel free to contribute to this lecture by submitting issues or pull requests on the [GitHub repository](https://github.com/muhammadraheelnaseem/python-directory-file-creator).
 
 ---
 
