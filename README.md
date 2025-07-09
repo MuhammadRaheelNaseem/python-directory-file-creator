@@ -133,6 +133,98 @@ create_from_structure(base_path, structure)
 print(f"Structure created at {os.path.abspath(base_path)}")
 ```
 
+`or`
+
+```python
+import os
+import re
+
+def create_from_structure(base_path, structure):
+    lines = structure.splitlines()
+    path_stack = [base_path]
+
+    for line in lines:
+        if not line.strip():
+            continue
+
+        # Extract name using regex and count depth
+        match = re.match(r'^(?P<prefix>[ │├─]*)[├└]?── ?(?P<name>.+)', line)
+        if not match:
+            # Might be root directory or invalid line
+            name = line.strip().rstrip('/')
+            if name.endswith(':') or not name:
+                continue
+            current_path = os.path.join(path_stack[0], name)
+            os.makedirs(current_path, exist_ok=True)
+            path_stack = [current_path]
+            continue
+
+        name = match.group('name').strip()
+        prefix = match.group('prefix')
+
+        if name.startswith('('):  # Skip placeholders
+            continue
+
+        # Each 4 non-name chars is one level deep
+        depth = prefix.count('│') + prefix.count('    ') + prefix.count('│   ')
+        while len(path_stack) > depth + 1:
+            path_stack.pop()
+
+        current_path = os.path.join(path_stack[-1], name)
+
+        if '.' in name:  # treat as file
+            os.makedirs(os.path.dirname(current_path), exist_ok=True)
+            with open(current_path, 'w') as f:
+                f.write('')
+        else:  # treat as folder
+            os.makedirs(current_path, exist_ok=True)
+            path_stack.append(current_path)
+
+# Example structure input
+structure = """python-directory-file-creator/
+├── app.py
+├── config.py
+├── requirements.txt
+├── .env
+├── Procfile
+├── static/
+│   ├── css/
+│   │   ├── main.css
+│   │   └── reset.css
+│   ├── js/
+│   │   ├── main.js
+│   │   └── editor.js
+│   └── images/
+│       └── logo.png
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── error/
+│   │   ├── 404.html
+│   │   └── 500.html
+├── utils/
+│   ├── geoip.py
+│   ├── pdf_generator.py
+│   └── logger.py
+├── logs/
+│   └── app.log
+├── temp/
+│   └── (temporary PDF files)
+├── firewall/
+│   └── firewall_rules.sh
+└── README.md"""
+
+# Run it
+base_path = "python-directory-file-creator"
+create_from_structure(base_path, structure)
+
+print(f" Structure created at: {os.path.abspath(base_path)}")
+```
+
+
+
 #### Explanation
 
 - **Hierarchy Parsing:** The script calculates the indentation based on leading spaces or hierarchy characters (`│`, `├─`). This indentation determines the current level in the directory hierarchy.
